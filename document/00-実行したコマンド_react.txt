@@ -1,0 +1,171 @@
+# ------------------------------------------------------------------------------
+# npmバージョンアップ
+# ------------------------------------------------------------------------------
+npm -g update
+
+# ------------------------------------------------------------------------------
+# プロジェクト作成
+# ------------------------------------------------------------------------------
+# Reactアプリ作成
+npm create vite
+
+>プロジェクトネーム
+>react
+>react-ts
+
+# ディレクトリ移動
+cd base_react_app
+
+# パッケージインストール
+npm install
+
+# 開発環境実行
+npm run dev
+
+# ------------------------------------------------------------------------------
+# ESLint
+# ------------------------------------------------------------------------------
+# ESLint 初期設定も行う
+npx eslint --init
+
+>To check syntax, find problems, and enforce code style
+>JavaScript modules (import/export)
+>React
+>Yes
+>Browser
+>Use a popular style guide
+>Airbnb: https://github.com/airbnb/javascript
+>JSON
+>Yes
+>npm npmでairbnbに必要なライブラリがインストールされるため、以下の拡張ルールセット、プラグインはインストールする必要がない
+
+# 上記でインストールされない、拡張ルールセット、プラグイン ※devDependenciesに追加
+npm install -D eslint-config-prettier
+npm install -D eslint-plugin-prefer-arrow
+
+# typesync ※devDependenciesに追加
+npm install -D typesync
+
+# カレントフォルダ配下に以下のファイルをコピー
+.eslintignore
+tsconfig.eslint.json
+
+# VS Codeの拡張機能をインストール
+https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+
+# ------------------------------------------------------------------------------
+# Prettier
+# ------------------------------------------------------------------------------
+# Prettier ※devDependenciesに追加
+npm install -D prettier eslint-config-prettier
+
+# カレントフォルダ配下に以下のファイルをコピー
+.prettierrc
+
+# VS Codeの拡張機能をインストール
+https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+
+# ------------------------------------------------------------------------------
+# stylelint
+# ------------------------------------------------------------------------------
+# stylelint ※devDependenciesに追加
+npm install -D stylelint
+npm install -D stylelint-config-standard 
+npm install -D stylelint-config-prettier 
+npm install -D stylelint-config-recess-order
+
+# カレントフォルダ配下に以下のファイルをコピー
+.stylelintrc.js
+
+# VS Codeの拡張機能をインストール
+https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint
+
+# ------------------------------------------------------------------------------
+# Storybook
+# ------------------------------------------------------------------------------
+# Storybook 初期設定も行う
+npx -p @storybook/cli sb init --type react_scripts
+
+# .eslintrc.jsのimport/no-extraneous-dependencies内に、storybook関係のファイルを除外するよう記述
+
+# Storybookアドオン
+npm install -D @storybook/addon-a11y @types/storybook__addon-a11y
+npm install -D @storybook/addon-controls
+npm install -D @storybook/addon-info @types/storybook__addon-info
+npm install -D @storybook/addon-links @types/storybook__addon-links
+npm install -D @storybook/react @types/storybook__react
+
+# ------------------------------------------------------------------------------
+# StoryShots
+# 参考URL:https://qiita.com/tetsurotayama/items/dd637e90f4ea008fd878
+# ------------------------------------------------------------------------------
+# React Test Renderer ※Reactと同じバージョンを入れる必要あり
+npm install -D react-test-renderer@18.2.0
+
+# StoryShots ↑のコマンドでControlなどのアドオンは追加されているが、StoryShotsははいってなかったので ※devDependenciesに追加
+npm install -D @storybook/addon-storyshots
+npm install -D @types/storybook__addon-storyshots
+
+# ------------------------------------------------------------------------------
+# Cypress
+# ------------------------------------------------------------------------------
+# Cypress ※devDependenciesに追加
+npm install -D cypress
+
+# ------------------------------------------------------------------------------
+# 使用パッケージインストール
+# ------------------------------------------------------------------------------
+# redux toolkit
+npm install @reduxjs/toolkit
+
+# redux-logger
+npm install redux-logger @types/redux-logger
+
+# React Hook Form
+npm install react-hook-form @hookform/resolvers yup
+
+# tanstack/react-location
+npm install @tanstack/react-location
+
+# tanstack/react-query
+npm install @tanstack/react-query
+
+# axios
+npm install axios
+
+# mui
+npm install @mui/material
+
+# emotion
+npm install @emotion/react @emotion/styled
+
+# 開発ツール ※devDependenciesに追加
+npm install -D @hookform/devtools@next @tanstack/react-query-devtools
+
+# ------------------------------------------------------------------------------
+# 使用パッケージのUpdate
+# ------------------------------------------------------------------------------
+# npm-check-updates
+npm install -g npm-check-updates
+
+# npm-check-updatesでpackage.json更新
+# よくタイムアウトするのでオプションで「--timeout=600000」とか付けるとよい
+ncu -u
+
+# npm-check-updatesで更新されたpackage.jsonの内容でnpm install
+npm install
+
+# ------------------------------------------------------------------------------
+# 脆弱性対応(全部修正されるとは言ってない)
+# ------------------------------------------------------------------------------
+npm audit fix --force
+
+# ------------------------------------------------------------------------------
+# 重複したパッケージの整理統合をこころみる
+# ------------------------------------------------------------------------------
+npm dedupe
+
+# ------------------------------------------------------------------------------
+# アプリケーション起動
+# ------------------------------------------------------------------------------
+F5キー押下
